@@ -1,0 +1,15 @@
+{
+  "name": "zhihu.md",
+  "version": "0.1.0",
+  "description": "transfer zhuanlan.zhihu.com artcle to md",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "h2m": "^0.7.0",
+    "puppeteer": "^1.12.2"
+  }
+}
