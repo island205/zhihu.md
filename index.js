@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const h2m = require('h2m');
 
-const zhuanlanURL = 'https://zhuanlan.zhihu.com/p/56947560'
+const zhuanlanURL = 'https://zhuanlan.zhihu.com/p/55357377'
 
 function wait (ms) {
   return new Promise(resolve => setTimeout(() => resolve(), ms));
@@ -43,7 +43,8 @@ function replaceAll(target, search, replacement) {
     // 修复代码格式
     document.querySelectorAll('pre').forEach(pre => pre.innerHTML = pre.innerText);
     // 避免重复
-    document.querySelectorAll('noscript').forEach(ns => ns.remove());
+    document.querySelectorAll('noscript').forEach(el => el.remove());
+    document.querySelectorAll('figcaption').forEach(el => el.remove());
     return document.querySelector('.Post-RichText').innerHTML;
   });
 
