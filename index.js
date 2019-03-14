@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const h2m = require("h2m");
 
-const zhuanlanURL = "https://zhuanlan.zhihu.com/p/57842018";
+const zhuanlanURL = "https://zhuanlan.zhihu.com/p/58835647";
 
 function wait(ms) {
   return new Promise(resolve => setTimeout(() => resolve(), ms));
@@ -37,15 +37,20 @@ function replaceAll(target, search, replacement) {
   }
 
   const article = await page.evaluate(() => {
+    function escapeHTML(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
     // 修复代码格式
     document
       .querySelectorAll("pre")
-      .forEach(pre => (pre.innerHTML = pre.innerText));
+      .forEach(pre => (pre.innerHTML = escapeHTML(pre.innerText)));
     // 避免重复
     document.querySelectorAll("noscript").forEach(el => el.remove());
     document.querySelectorAll("figcaption").forEach(el => el.remove());
+
     let titleImage = document.querySelector(".TitleImage");
     titleImage = titleImage ? titleImage.src : null;
+
     return {
       articleHTML: document.querySelector(".Post-RichText").innerHTML,
       titleImage,
